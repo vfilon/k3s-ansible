@@ -7,13 +7,11 @@ jobs:
     name: Molecule
     runs-on: macos-12
     strategy:
+      matrix:
+        scenario:
+          - ipv6
       fail-fast: false
     env:
       PYTHON_VERSION: "3.11"
   steps:
     - uses: ./.github/workflows/molecule-template.yml
-  molecule:
-    strategy:
-      matrix:
-        scenario:
-          - ipv6
