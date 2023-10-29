@@ -15,7 +15,7 @@ jobs:
     needs: [lint]
   test-ipv6:
     uses: ./.github/workflows/test-ipv6.yml
-    needs: [lint,test-default]
+    needs: [lint, test-default]
   test-single-node:
     uses: ./.github/workflows/test-single-node.yml
-    needs: [lint,test-default,test-ipv6]
+    needs: [lint, test-default, test-ipv6]
