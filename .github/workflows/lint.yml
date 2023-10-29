@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@e2f20e631ae6d7dd3b768f56a5d2af784dd54791 # v3 2.5.0
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # 4.1.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
@@ -23,7 +23,7 @@ jobs:
           cache: 'pip' # caching pip dependencies
 
       - name: Cache pip
-        uses: actions/cache@9b0c1fce7a93df8e3bb8926b0d6e9d89e92f20a7 # 3.0.11
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # 3.3.2
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('./requirements.txt') }}
@@ -31,7 +31,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Cache Ansible
-        uses: actions/cache@9b0c1fce7a93df8e3bb8926b0d6e9d89e92f20a7 # 3.0.11
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # 3.3.2
         with:
           path: ~/.ansible/collections
           key: ${{ runner.os }}-ansible-${{ hashFiles('collections/requirements.txt') }}
@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@e2f20e631ae6d7dd3b768f56a5d2af784dd54791 # v3 2.5.0
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # 4.1.1
       - name: Ensure SHA pinned actions
         uses: zgosalvez/github-actions-ensure-sha-pinned-actions@af2eb3226618e2494e3d9084f515ad6dcf16e229 # 2.0.1
         with:
