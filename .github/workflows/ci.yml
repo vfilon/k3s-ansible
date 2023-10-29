@@ -1,6 +1,5 @@
 ---
 name: "CI"
-concurrency: github_ci
 on:
   pull_request:
   push:

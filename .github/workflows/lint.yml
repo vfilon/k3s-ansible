@@ -1,6 +1,5 @@
 ---
 name: Linting
-concurrency: github_ci
 on:
   workflow_call:
 jobs:
