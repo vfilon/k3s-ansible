@@ -14,5 +14,11 @@ jobs:
     env:
       PYTHON_VERSION: "3.11"
     steps:
-      - uses: actions/checkout@e2f20e631ae6d7dd3b768f56a5d2af784dd54791 # v3 2.5.0
+      - name: Check out the codebase
+        uses: actions/checkout@e2f20e631ae6d7dd3b768f56a5d2af784dd54791 # v3 2.5.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
       - uses: "./.github/workflows/molecule-template.yml"
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
