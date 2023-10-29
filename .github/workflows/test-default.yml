@@ -14,4 +14,4 @@ jobs:
     env:
       PYTHON_VERSION: "3.11"
   steps:
-  - uses: ./.github/workflows/molecule-template.yml
+    uses: ./.github/workflows/molecule-template.yml
