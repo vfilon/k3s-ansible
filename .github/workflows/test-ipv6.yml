@@ -5,7 +5,7 @@ on:
 jobs:
   steps:
     - name: IPv6
-      uses: .github/workflows/molecule-template.yml
+      uses: ./.github/workflows/molecule-template.yml
   molecule:
     strategy:
       matrix:
