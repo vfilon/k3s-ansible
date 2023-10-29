@@ -3,10 +3,10 @@ name: Test Single Node
 on:
   workflow_call:
 jobs:
+  steps:
+    - uses: ./.github/workflows/molecule-template.yml
   molecule:
     strategy:
       matrix:
         scenario:
           - single_node
-extends:
-  - .github/workflows/molecule-template.yml

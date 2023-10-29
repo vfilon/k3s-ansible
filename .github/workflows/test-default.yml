@@ -3,10 +3,10 @@ name: Test Default
 on:
   workflow_call:
 jobs:
+  steps:
+    - uses: ./.github/workflows/molecule-template.yml
   molecule:
     strategy:
       matrix:
         scenario:
           - default
-extends:
-  - .github/workflows/molecule-template.yml
