@@ -1,7 +1,5 @@
 ---
 name: Molecule Template
-on:
-  workflow_call:
 jobs:
   molecule:
     name: Molecule
