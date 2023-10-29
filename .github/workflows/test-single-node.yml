@@ -1,5 +1,6 @@
 ---
 name: Molecule Template
+concurrency: github_ci
 on:
   workflow_call:
 jobs:
