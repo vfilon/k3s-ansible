@@ -9,4 +9,4 @@ jobs:
         scenario:
           - ipv6
 extends:
-  - ./.github/workflows/molecule-template.yml
+  - .github/workflows/molecule-template.yml

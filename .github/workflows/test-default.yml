@@ -9,4 +9,4 @@ jobs:
         scenario:
           - default
 extends:
-  - ./.github/workflows/molecule-template.yml
+  - .github/workflows/molecule-template.yml

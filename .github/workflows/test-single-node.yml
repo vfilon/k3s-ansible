@@ -9,4 +9,4 @@ jobs:
         scenario:
           - single_node
 extends:
-  - ./.github/workflows/molecule-template.yml
+  - .github/workflows/molecule-template.yml
