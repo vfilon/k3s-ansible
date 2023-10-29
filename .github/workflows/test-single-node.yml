@@ -4,8 +4,7 @@ on:
   workflow_call:
 jobs:
   steps:
-    - name: Single Node
-      uses: ./.github/workflows/molecule-template.yml
+    - uses: ./.github/workflows/molecule-template.yml
   molecule:
     strategy:
       matrix:
