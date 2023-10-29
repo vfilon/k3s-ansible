@@ -1,5 +1,5 @@
 ---
-name: Test
+name: Molecule Template
 on:
   workflow_call:
 jobs:
@@ -7,11 +7,6 @@ jobs:
     name: Molecule
     runs-on: macos-12
     strategy:
-      matrix:
-        scenario:
-          - default
-          - ipv6
-          - single_node
       fail-fast: false
     env:
       PYTHON_VERSION: "3.11"

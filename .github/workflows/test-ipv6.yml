@@ -1,0 +1,12 @@
+---
+name: Test IPv6
+on:
+  workflow_call:
+jobs:
+  molecule:
+    strategy:
+      matrix:
+        scenario:
+          - ipv6
+extends:
+  - ./.github/workflows/molecule-template.yml

@@ -1,0 +1,12 @@
+---
+name: Test Default
+on:
+  workflow_call:
+jobs:
+  molecule:
+    strategy:
+      matrix:
+        scenario:
+          - default
+extends:
+  - ./.github/workflows/molecule-template.yml
