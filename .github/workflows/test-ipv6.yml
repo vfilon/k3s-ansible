@@ -4,7 +4,7 @@ on:
   workflow_call:
 jobs:
   steps:
-    - uses: ./.github/workflows/molecule-template.yml
+    - uses: .github/workflows/molecule-template.yml
   molecule:
     strategy:
       matrix:
