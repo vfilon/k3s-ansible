@@ -3,6 +3,13 @@ name: Test IPv6
 on:
   workflow_call:
 jobs:
+  molecule:
+    name: Molecule
+    runs-on: macos-12
+    strategy:
+      fail-fast: false
+    env:
+      PYTHON_VERSION: "3.11"
   steps:
     - uses: ./.github/workflows/molecule-template.yml
   molecule:
