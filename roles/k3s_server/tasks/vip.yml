@@ -17,10 +17,6 @@
     mode: 0644
   when: ansible_hostname == hostvars[groups[group_name_master | default('master')][0]]['ansible_hostname']
 
-- name: show templating results
-  ansible.builtin.debug:
-    msg: "{{ lookup('ansible.builtin.template', 'vip.yaml.j2') }}"
-
 - name: Copy vip manifest to first master
   template:
     src: "vip.yaml.j2"
