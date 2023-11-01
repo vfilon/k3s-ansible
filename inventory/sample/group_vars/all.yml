@@ -41,7 +41,16 @@ extra_agent_args: >-
   {{ extra_args }}
 
 # image tag for kube-vip
-kube_vip_tag_version: "v0.5.12"
+kube_vip_tag_version: "v0.6.3"
+# image tag for kube-vip-cloud-controller
+kube_vip_cloud_provider_tag_version: "v0.0.7"
+# See example config map https://kube-vip.io/docs/usage/cloud-provider/
+# kube_vip_cloud_provider_config: |
+#   cidr-default: 192.168.0.200/29                      # CIDR-based IP range for use in the default Namespace
+#   range-development: 192.168.0.210-192.168.0.219      # Range-based IP range for use in the development Namespace
+#   cidr-finance: 192.168.0.220/29,192.168.0.230/29     # Multiple CIDR-based ranges for use in the finance Namespace
+#   cidr-global: 192.168.0.240/29                       # CIDR-based range which can be used in any Namespace
+kube_vip_cloud_provider_config: ""
 
 # metallb type frr or native
 metal_lb_type: "native"

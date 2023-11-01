@@ -6,11 +6,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: kube-vip-ds
+      app.kubernetes.io/name: kube-vip-ds
   template:
     metadata:
       labels:
-        name: kube-vip-ds
+        app.kubernetes.io/name: kube-vip-ds
     spec:
       affinity:
         nodeAffinity:
@@ -43,17 +43,27 @@ spec:
         - name: vip_ddns
           value: "false"
         - name: svc_enable
-          value: "false"
+          value: "true"
         - name: vip_leaderelection
           value: "true"
         - name: vip_leaseduration
-          value: "15"
+          value: "5"
         - name: vip_renewdeadline
-          value: "10"
+          value: "3"
         - name: vip_retryperiod
-          value: "2"
+          value: "1"
+        - name: lb_enable
+          value: "true"
+        - name: lb_port
+          value: "6443"
+        - name: lb_fwdmethod
+          value: local
+        - name: svc_election
+          value: "true"
         - name: address
           value: {{ apiserver_endpoint }}
+        - name: prometheus_server
+          value: :2112
         image: ghcr.io/kube-vip/kube-vip:{{ kube_vip_tag_version }}
         imagePullPolicy: Always
         name: kube-vip
@@ -63,7 +73,6 @@ spec:
             add:
             - NET_ADMIN
             - NET_RAW
-            - SYS_TIME
       hostNetwork: true
       serviceAccountName: kube-vip
       tolerations:
@@ -77,3 +86,85 @@ status:
   desiredNumberScheduled: 0
   numberMisscheduled: 0
   numberReady: 0
+
+{% if kube_vip_cloud_provider_config %}
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kube-vip-worker-ds
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kube-vip-worker-ds
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kube-vip-worker-ds
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: DoesNotExist
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
+      containers:
+      - args:
+        - manager
+        env:
+        - name: vip_arp
+          value: "true"
+        - name: port
+          value: "6443"
+{% if kube_vip_iface %}
+        - name: vip_interface
+          value: {{ kube_vip_iface }}
+{% endif %}
+        - name: vip_cidr
+          value: "{{ apiserver_endpoint | ansible.utils.ipsubnet | ansible.utils.ipaddr('prefix') }}"
+        - name: svc_enable
+          value: "true"
+        - name: svc_election
+          value: "true"
+        - name: vip_leaderelection
+          value: "true"
+        - name: vip_leaseduration
+          value: "5"
+        - name: vip_renewdeadline
+          value: "3"
+        - name: vip_retryperiod
+          value: "1"
+        - name: vip_address
+        - name: prometheus_server
+          value: :2112
+        image: ghcr.io/kube-vip/kube-vip:{{ kube_vip_tag_version }}
+        imagePullPolicy: Always
+        name: kube-vip
+        resources: {}
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - NET_RAW
+      hostNetwork: true
+      serviceAccountName: kube-vip
+  updateStrategy: {}
+status:
+  currentNumberScheduled: 0
+  desiredNumberScheduled: 0
+  numberMisscheduled: 0
+  numberReady: 0
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubevip
+  namespace: kube-system
+data: 
+  {{ kube_vip_cloud_provider_config | indent(2) }}
+{% endif %}
