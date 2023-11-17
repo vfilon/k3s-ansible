@@ -4,6 +4,16 @@
     name: "{{ system_timezone }}"
   when: (system_timezone is defined) and (system_timezone != "Your/Timezone")
 
+- name: Make sure chronyd is installed
+  ansible.builtin.package:
+    state: present
+    name: chrony
+
+- name: Restart chronyd
+  ansible.builtin.service:
+    name: chronyd
+    state: restarted
+
 - name: Set SELinux to disabled state
   ansible.posix.selinux:
     state: disabled
