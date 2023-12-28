@@ -43,7 +43,7 @@ spec:
         - name: vip_ddns
           value: "false"
         - name: svc_enable
-          value: "true"
+          value: "false"
         - name: vip_leaderelection
           value: "true"
         - name: vip_leaseduration
@@ -52,14 +52,6 @@ spec:
           value: "3"
         - name: vip_retryperiod
           value: "1"
-        - name: lb_enable
-          value: "true"
-        - name: lb_port
-          value: "6443"
-        - name: lb_fwdmethod
-          value: local
-        - name: svc_election
-          value: "true"
         - name: address
           value: {{ apiserver_endpoint }}
         - name: prometheus_server
