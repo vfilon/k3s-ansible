@@ -9,6 +9,11 @@
     state: present
     name: chrony
 
+- name: Make sure nfs-utils is installed
+  ansible.builtin.package:
+    state: present
+    name: nfs-utils
+
 - name: Restart chronyd
   ansible.builtin.service:
     name: chronyd
