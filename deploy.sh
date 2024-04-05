@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ansible-playbook site.yml --skip-tags metallb
+ansible-playbook site.yml
