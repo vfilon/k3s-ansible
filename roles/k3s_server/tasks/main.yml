@@ -153,6 +153,10 @@
     dest: /usr/local/bin/crictl
     state: link
 
+- name: Let's wait 15 seconds before deleting manifests
+  wait_for:
+    timeout: 15
+
 - name: Get contents of manifests folder
   find:
     paths: /var/lib/rancher/k3s/server/manifests
