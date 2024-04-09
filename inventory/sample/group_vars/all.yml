@@ -71,6 +71,9 @@ extra_server_args: >-
 extra_agent_args: >-
   {{ extra_args }}
 
+# interface which will be used for kube-vip
+# kube_vip_iface: "eth0"
+
 # image tag for kube-vip
 kube_vip_tag_version: "v0.6.4"
 

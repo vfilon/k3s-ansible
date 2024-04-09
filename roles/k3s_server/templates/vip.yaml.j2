@@ -6,11 +6,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: kube-vip-ds
+      app.kubernetes.io/name: kube-vip-ds
   template:
     metadata:
       labels:
-        name: kube-vip-ds
+        app.kubernetes.io/name: kube-vip-ds
     spec:
       affinity:
         nodeAffinity:
@@ -90,7 +90,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: kube-vip-worker-ds
+      app.kubernetes.io/name: kube-vip-worker-ds
   template:
     metadata:
       labels:
